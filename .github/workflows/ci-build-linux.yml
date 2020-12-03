@@ -1,0 +1,29 @@
+# Support for GitHub Actions -- https://github.com/features/actions
+# Copyright (C) Markus Franz Xaver Johannes Oberhumer
+
+
+name: GitHub CI
+
+on:
+  push:
+    branches:
+      - '!appveyor*'
+      - '!gitlab*'
+      - '!travis*'
+
+jobs:
+  runs-on: ${{ matrix.os }}
+  strategy:
+    matrix:
+      os: [ubuntu-16.04, ubuntu-18.04]
+  steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - run: |
+        bash --version
+        env
+        /bin/false
+        env
+
+# vim:set ts=2 sw=2 et:
